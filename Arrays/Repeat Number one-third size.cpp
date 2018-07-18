@@ -36,3 +36,22 @@ int Solution::repeatedNumber(const vector<int> &A) {
     
     count1=0;
     count2=0;
+
+    //Check if the majority element found is correct or not
+    for(int i=0;i<n;i++){
+        if(A[i]==first){
+            count1++;
+        }
+        else if(A[i]==second){
+            count2++;
+        }
+        
+        if(count1 > n/3)
+            return first;
+        
+        if(count2> n/3)
+            return second;
+    }
+    
+    return -1;
+}
