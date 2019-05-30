@@ -1,4 +1,4 @@
-int Solution::maximumGap(const vector<int> &A) {
+/*int Solution::maximumGap(const vector<int> &A) {
     int n = A.size();
     vector<int> lmin (n);
     vector<int> rmax (n);
@@ -25,4 +25,23 @@ int Solution::maximumGap(const vector<int> &A) {
     }
     
     return maxDiff;
+}*/
+
+int Solution::maximumGap(const vector<int> &A) {
+    int res = 0;
+    vector <pair<int,int>> v;
+    for(int i=0;i<A.size();i++){
+        v.push_back({A[i],i});
+    }
+    
+    sort(v.begin(),v.end());
+    
+    int ind = v[v.size()-1].second;
+    for(int i=v.size()-2;i>=0;i--){
+        res = max(res,ind - v[i].second);
+        ind = max(ind,v[i].second);
+    }
+    
+    return res; 
 }
+
