@@ -1,3 +1,4 @@
+/*
 vector<int> Solution::plusOne(vector<int> &A) {
     int carry = 1;
     int i=0;
@@ -17,5 +18,26 @@ vector<int> Solution::plusOne(vector<int> &A) {
         A.insert(A.end(),carry);
     
     reverse(A.begin(),A.end());
+    return A;
+}
+*/
+
+vector<int> Solution::plusOne(vector<int> &A) {
+    
+    int n = A.size();
+    int c = 1;
+    int temp;
+    for(int i = n-1;i>=0;i--){
+        temp = A[i] + c;
+        A[i] = temp % 10;
+        c = temp/10;
+    }
+    
+    A.insert(A.begin(),c);
+    int j=0;
+    while(A[j] == 0){
+        A.erase(A.begin());
+    }
+    
     return A;
 }
