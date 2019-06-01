@@ -13,7 +13,7 @@ void Solution::rotate(vector<vector<int> > &A) {
         }
     }
     
-    //reverse rows
+    //reverse columns
     for(int i=0;i<n;i++){
         for(int j=0,k=n-1;j<k;j++,k--){
             swap(A[i][j],A[i][k]);
