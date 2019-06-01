@@ -1,16 +1,17 @@
-vector<vector<int> > Solution::generate(int n) {
-    int row = n;
-    if(row == 0)
-        return vector <vector <int>> ();
-    vector <vector <int>> tri(row);
-    for(int line =0; line<row; line++){
-        tri[line] = vector <int> (line+1);
-        int C =1;
-        for(int i=0;i<=line;i++){
-            tri[line][i] = C;
-            C = C * (line - i)/(i+1);
+vector<vector<int> > Solution::solve(int A) {
+
+    vector<vector<int>> v(A);
+    for(int i=0;i<A;i++){
+        for(int j=0;j<=i;j++){
+            if(j==0 || j==i){
+                v[i].push_back(1);
+            }
+            else{
+                int x = v[i-1][j] + v[i-1][j-1];
+                v[i].push_back(x);
+            }
         }
     }
     
-    return tri;
+    return v;
 }
