@@ -1,4 +1,4 @@
-int Solution::isPower(int A) {
+/*int Solution::isPower(int A) {
     if(A==1){
         return 1;
     }
@@ -16,4 +16,26 @@ int Solution::isPower(int A) {
     }
     
     return 0;
+}*/
+
+//Alternate Solution
+int Solution::isPower(int A) {
+    if(A==1){
+        return 1;
+    }
+    
+    for(int i=2;i<=sqrt(A);i++){ 
+        int x = A;
+        while(x!=0){
+            if(x%i != 0){
+                break;
+            }
+            x = x/i;
+        }
+        if(x==1)
+            return 1;
+    }
+    
+    return 0;
 }
+
