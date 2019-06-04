@@ -1,29 +1,16 @@
 int Solution::reverse(int A) {
     
-    // bool negative = false;
-    // if(A<0){
-    //     negative = true;
-    //     A = -A;
-    // }
-    // cout<<sizeof(long int)<<'\n';
-    // cout<<INT_MAX<<'\n';
-    long int res = 0;
-    // int prev_num = 0;
+    int reverse = 0;
+    //int num = A;
     while(A!=0){
-        int curr_num = A%10;
-        res = (res*10) + curr_num;
-        // if((res-curr_num)/10 != prev_num){
-        //     return 0;
-        // }
-        
-        // prev_num = res;
-        A = A/10; 
-        if(res>INT_MAX || res<INT_MIN)
+        int rem = A%10;
+        if( (reverse > INT_MAX/10) || (reverse == INT_MAX/10 && rem>INT_MAX%10) || (reverse < INT_MIN/10) || (reverse == INT_MIN/10 && rem<INT_MIN%10) )
             return 0;
+        reverse = reverse*10 + rem;
+        A = A/10;
     }
     
-    // if(negative == true) 
-    //     return -res;
-    // else 
-        return (int)res;
+    return reverse;
+
 }
+
