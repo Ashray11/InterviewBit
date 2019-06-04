@@ -1,26 +1,18 @@
 int Solution::isPalindrome(int A) {
     
     if(A<0){
-        return false;
+        return 0;
     }
-    
-    
-    int divisor = 1;
-    while(A/divisor>=10){
-        divisor*=10;
-    }
-    
+    int reverse = 0;
+    int num = A;
     while(A!=0){
-        int leading = A/divisor;
-        int trailing = A%10;
-        
-        if(leading!=trailing){
-            return false;
-        }
-        
-        A = (A%divisor)/10;
-        divisor = divisor/100;
+        int rem = A%10;
+        reverse = reverse*10 + rem;
+        A = A/10;
     }
     
-    return true;
+    if(reverse == num){
+        return 1;
+    }
+    return 0;
 }
