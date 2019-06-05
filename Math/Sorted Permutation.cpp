@@ -1,36 +1,25 @@
-//This solution doesn't work for larger inputs.
-int fact(int n){
-    if(n<=1){
+long fact(int n){
+    if(n==0)
         return 1;
-    }
-    else
-        return (n*(fact(n-1));
-}
-
-int findSmallerInRight(string str, int low, int high){
-    int countRight = 0, i;
     
-    for(i=low+1;i<=high;i++){
-        if(str[i]<str[low])
-            countRight++;
-    }
-    
-    return countRight;
+    return (n*fact(n-1)%1000003)%1000003;
 }
 
 int Solution::findRank(string A) {
-    int n = A.size();
-    int mul = fact(n);
-    int rank = 1;
-    int countRight;
-    
-    int i;
-    for(i=0;i<n;i++){
-        mul /= n-i;
-        
-        countRight = findSmallerInRight(A,i,n-1);
-        rank += (countRight*mul);
+    long res = 0;
+    while(A.size()>1){
+        char c = A[0];
+        int count = 0;
+        for(int i=1;i<A.length();i++){
+            if(A[i]<c){
+                count++;
+            }
+        }
+        if(count!=0)
+            res += (count*fact(A.length()-1))%1000003;
+        A.erase(A.begin());
     }
     
-    return rank;
+    return (res+1)%1000003;
 }
+
