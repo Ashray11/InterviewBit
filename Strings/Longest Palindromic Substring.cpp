@@ -1,42 +1,38 @@
-string Solution::longestPalindrome(string A) {
 
+//DP Solution
+string Solution::longestPalindrome(string A) {
+    int len = A.length();
+    if(len == 0 || len == 1){
+        return A;
+    }
+    
     int start = 0;
-    int length = A.size();
-    int maxLen = 1;
+    int maxm = 1;
     
-    int low = 0, high;
+    vector <vector<bool>> v(A.length(), vector<bool>(A.length(),false));
     
-    for(int i = 0; i < length; i++){
-        low = i-1;
-        high = i;
-        while((low >= 0) && (high < length) && (A[low] == A[high])){
-            if((high - low + 1) > maxLen){
-                maxLen = high-low+1;
-                start = low;
-            }        
-            low--;
-            high++;
-        }
-        
-        low = i-1;
-        high = i+1;
-        while((low >= 0) && (high < length) && A[low] == A[high]){
-            if((high - low + 1) > maxLen){
-                maxLen = high-low+1;
-                start = low;
+    for(int j=0;j<len;j++){
+        for(int i=j;i>=0;i--){
+            if(i==j){
+                v[i][j] = true;
+                continue;
             }
-            low--;
-            high++;
+            else if(A[i] == A[j]){
+                if(j-i == 1){
+                    v[i][j] = true;
+                }
+                else{
+                    v[i][j] = v[i+1][j-1];
+                }
+            }
+            
+            if(v[i][j] && j-i+1 > maxm){
+                maxm = j-i+1;
+                start = i;
+            }
         }
     }
     
-    string sol = "";
-    
-    high = start+maxLen;
-    while(start != high){
-        sol = sol + A[start];
-        start++;
-    }
-    
-    return sol;
+    string temp = A.substr(start,maxm);
+    return temp;
 }
