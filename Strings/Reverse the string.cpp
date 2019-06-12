@@ -4,23 +4,20 @@ void Solution::reverseWords(string &A) {
     // Do not print the output, instead return values as specified
     // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
 
-    int start, count;
-    int i = A.length()-1;
-    string temp="";
-    while(i>=0){
-        count = 0;
-        while(A[i] == ' ' && i>=0){
-            i--;
+        string res;
+        int pos = 0;
+        for(int i=0;i<A.size();i++){
+            if(A[i] == ' '){
+                if(i>pos){
+                   res = A.substr(pos,i-pos) + " " + res; 
+                }
+                pos = i+1;
+            }
+            else if(i==A.length()-1){
+                res = A.substr(pos,A.size()-pos) + " " + res;
+            }
         }
-        while(A[i] != ' ' && i>=0){
-            count++;
-            i--;
-        }
-        start = i+1;
-        temp.append(A,start,count);
-        if(i>=0)
-            temp+=" ";
-    }
-    
-    A = temp;
+        
+        A = res.substr(0,res.size()-1);
+        
 }
